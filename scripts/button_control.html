@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+    .header{
+        text-align: center;
+    }
+    .column{
+        float: left;
+        width: 48%;
+        padding: 10px;
+        text-align: center;
+    }
+    .row:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+
+<script type="text/javascript" src="http://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+
+<script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+
+<script type="text/javascript" type="text/javascript">
+
+// Connecting to ROS
+// ------------------
+
+var ros = new ROSLIB.Ros({
+	url : 'ws://10.219.21.68:9090'
+});
+
+ros.on('connection', function(){
+	console.log('Connected to websocket server.');
+});
+
+ros.on('error', function(error){
+	console.log('Error connecting to websocket server:', error);
+});
+
+ros.on('close', function(){
+	console.log('Connected to websocket server closed.');
+});
+
+// Publishing Topic "to_robot2_cmd"
+// ------------------
+var robot_2_Cmd = new ROSLIB.Topic({
+	ros : ros,
+	name : 'to_robot2_cmd',
+	messageType : 'std_msgs/String'
+});
+
+function forward_2() {
+    var cmd = new ROSLIB.Message({
+    	data : 'forward'
+    });
+    robot_2_Cmd.publish(cmd);
+}
+function back_2() {
+    var cmd = new ROSLIB.Message({
+    	data : 'back'
+    });
+    robot_2_Cmd.publish(cmd);
+}
+function left_2() {
+    var cmd = new ROSLIB.Message({
+    	data : 'left'
+    });
+    robot_2_Cmd.publish(cmd);
+}
+function right_2() {
+    var cmd = new ROSLIB.Message({
+    	data : 'right'
+    });
+    robot_2_Cmd.publish(cmd);
+}
+function home_2() {
+    var cmd = new ROSLIB.Message({
+        data : 'home'
+    });
+    robot_2_Cmd.publish(cmd);
+}
+function stop_2() {
+    var cmd = new ROSLIB.Message({
+        data : 'stop'
+    });
+    robot_2_Cmd.publish(cmd);
+}
+
+// Publishing Topic "to_robot3_cmd"
+// ------------------
+var robot_3_Cmd = new ROSLIB.Topic({
+    ros : ros,
+    name : 'to_robot3_cmd',
+    messageType : 'std_msgs/String'
+});
+
+function forward_3() {
+    var cmd = new ROSLIB.Message({
+        data : 'forward'
+    });
+    robot_3_Cmd.publish(cmd);
+}
+function back_3() {
+    var cmd = new ROSLIB.Message({
+        data : 'back'
+    });
+    robot_3_Cmd.publish(cmd);
+}
+function left_3() {
+    var cmd = new ROSLIB.Message({
+        data : 'left'
+    });
+    robot_3_Cmd.publish(cmd);
+}
+function right_3() {
+    var cmd = new ROSLIB.Message({
+        data : 'right'
+    });
+    robot_3_Cmd.publish(cmd);
+}
+function home_3() {
+    var cmd = new ROSLIB.Message({
+        data : 'home'
+    });
+    robot_3_Cmd.publish(cmd);
+}
+function stop_3() {
+    var cmd = new ROSLIB.Message({
+        data : 'stop'
+    });
+    robot_3_Cmd.publish(cmd);
+}
+
+// video 
+// ------------------------------
+var viewer_1 = new ROS2D.Viewer({
+  divID : 'nav_1',
+  width : 400,
+  height : 400
+});    
+var viewer_2 = new ROS2D.Viewer({
+  divID : 'nav_2',
+  width : 400,
+  height : 400
+});
+</script>
+
+<body>
+
+<div class="header">
+<h1>Remote Control Robot</h1>
+</div>
+
+<div class="row">
+<div class="column">
+<h2>Robot_2</h2>
+<div id="nav_1"><img src="http://10.219.21.68:8080/stream?topic=/image_view_2/output" height="400" width="600"></div>
+<button onclick="forward_2()">forward</button>
+<button onclick="back_2()">back</button>
+<button onclick="left_2()">left</button>
+<button onclick="right_2()">right</button>
+<button onclick="stop_2()">stop</button>
+</div>
+<div class="column">
+<h2>Robot_3</h2>
+<div id="nav_2"><img src="http://10.219.21.68:8080/stream?topic=/image_view_3/output" height="400" width="600"></div>
+<button onclick="forward_3()">forward</button>
+<button onclick="back_3()">back</button>
+<button onclick="left_3()">left</button>
+<button onclick="right_3()">right</button>
+<button onclick="stop_3()">stop</button>
+</div>
+</div>
+
+
+</body>
+</html>

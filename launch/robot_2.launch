@@ -1,0 +1,8 @@
+<launch>
+
+	<group ns="robot_2">
+		<include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+	</group>        
+	<include file="$(find finalP)/launch/usb_cam-test_2.launch"/>
+
+</launch>

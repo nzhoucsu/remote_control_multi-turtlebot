@@ -1,0 +1,7 @@
+<launch>
+
+	<include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+        <node pkg="web_video_server" name="web_video_server" type="web_video_server"/>
+	<node pkg="final_project" name="robot3_listen" type="robot3_listener_0426.py"/>
+	<node pkg="final_project" name="robot2_listen" type="robot2_listener_0426.py"/>
+</launch>
